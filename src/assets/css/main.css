@@ -1,6 +1,30 @@
 @import url("https://legendary-donut-99380b.netlify.app/basic-styles/basicStyles.css");
+@import url("./abstracts/variables.css");
+@import url("./text/text.css");
+@import url("./components/components.css");
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+input {
+    border: none;
+    background: none;
+}
+
+body {
+    width: 400px;
+    margin: auto;
+    background-color: rgb(24, 24, 24);
+    border: 1px solid var(--secondary-color);
+}
 
 main {
-    width: 1200px;
+    width: 100%;
+    color: white;
+    padding: 20px;
     margin:auto;
+    
 }

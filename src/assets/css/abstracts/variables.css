@@ -1,0 +1,24 @@
+:root {
+
+    /* colors */
+
+    /* background color */
+    --primary-color: black;
+
+    /* main content color */
+    --secondary-color: #f0b323;
+    --secondary-color-faded: #f0b223a8;
+
+    /* selected items */
+    --highlight-color: #f0b323;
+
+    /* error and banned items */
+    --negative-color: red;
+    
+    /* activated parameter */
+    --positive-color: green;
+
+
+    --content-color: #F0B323;
+}
+
