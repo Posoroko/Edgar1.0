@@ -20,6 +20,7 @@
 import { ref } from 'vue'
 import SoloButton from '@/components/buttons/SoloButton.vue'
 import ButtonStripe from '@/components/buttons/ButtonStripe.vue'
+import { LogLevel } from '@firebase/logger';
 
 const soloButtonProperties = ref({
     text: "Submit",
@@ -48,7 +49,6 @@ const buttonStripeProperties = ref ({
     selector: false,
     
 })
-
 </script>
 
 <style scoped>

@@ -28,3 +28,37 @@ main {
     margin:auto;
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.flex {
+    display: flex;
+}
+.column {
+    flex-direction: column;
+}
+.centered {
+    display: grid;
+    place-items: center;
+}
+.center {
+    justify-content: center;
+}
+.marginTop20 {
+    margin-top: 20px;
+}

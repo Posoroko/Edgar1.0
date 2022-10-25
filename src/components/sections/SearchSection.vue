@@ -1,5 +1,5 @@
 <template>
-    <section class="searchSection width100">
+    <section class="searchSection width100 marginTop20">
         
         <div class="topOptionsBox">
             <p class="sectionTitle tab">
@@ -68,10 +68,10 @@ import { ref } from 'vue'
     font-size: 18px;
     color: var(--secondary-color);
     background-color: var(--primary-color);
-    padding: 5px 10px;
+    padding: 10px 15px;
     border: none;
-    border-radius: 50px;
-    resize: none;
+    border-radius: 20px;
+    resize: vertical;
 }
 
 </style>
