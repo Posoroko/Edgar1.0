@@ -73,6 +73,7 @@ import { ref } from 'vue'
 import { selectedFolder, selectedSearch, folderData } from '@/edgar/explorer.js'
 import { addFolder, addSearch } from '@/composables/updateFolderData'
 import { error, isPending } from '@/edgar/errorPending'
+import { getFolderData } from '@/composables/loadExplorer'
 
 //All about folders
 
@@ -88,7 +89,6 @@ const selectFolder = (folder) => {
 
 const requestNewFolder = () => {
 
-    
     creatingNewFolder.value = true
 
     // wait for dom to update, it needs a better solution
@@ -100,7 +100,6 @@ const requestNewFolder = () => {
 
 const createNewFolder = async () => {
     
-
     if(!newFolderInput.value.value) {
         return
     }
@@ -141,6 +140,7 @@ const createNewSearch = async () => {
     
     
     if(!newSearchInput.value.value) {
+        console.log('no input')
         return
     }
     let newName = newSearchInput.value.value
@@ -153,6 +153,8 @@ const createNewSearch = async () => {
     
     
 }
+
+getFolderData()
 
 
 </script>

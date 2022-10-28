@@ -10,7 +10,7 @@ export const selectedFolder = ref('0')
 export const selectedSearch = ref('0')
 
 export const folderData = ref(null)
-getFolderData()
+
 
 export const selectedSearchContent = ref()
 

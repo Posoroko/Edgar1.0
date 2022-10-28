@@ -29,8 +29,8 @@
       <input id="passwordInput" type="password" placeholder="password" v-model="password">
 
       <div class="buttonBox centered marginTop20">
-        <button class="button soloBtn solidFrame" v-if="!isNewUser" @click.prevent="logInAccount">log in</button>
-        <button class="button soloBtn solidFrame" v-if="isNewUser" @click.prevent="createAccount">create account</button>
+        <button class="button soloBtn solidFrame" v-if="!isNewUser" @click.prevent="handleClickSignIn">log in</button>
+        <button class="button soloBtn solidFrame" v-if="isNewUser" @click.prevent="handleClickSignUp">create account</button>
       </div>
     
     </form>
@@ -43,13 +43,10 @@
 import { images } from '@/config/config.js'
 import { ref} from 'vue'
 import { auth } from '@/firebase/config'
+import { signIn } from '@/composables/auth/signIn'
+import { signUp } from '@/composables/auth/signUp'
 import router from '@/router/index'
-
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-
-const isPending = ref(false)
-const error = ref(false)
-const errorMessage = ref("")
 
 const isNewUser = ref(false)
 
@@ -57,67 +54,39 @@ const isNewUser = ref(false)
 const email = ref("")
 const password = ref("")
 
-const createAccount = async () => {
+const handleClickSignIn = () => {
 
-    if(isPending.value) {
-        return
-    }
-
-    isPending.value = true
-    error.value = false
-
-    if(!singUpFormIsValid) {
+    if(!formIsValid()) {
         console.log('Something is not ok...')
         error.value = true
         return
     }
 
-    await createUserWithEmailAndPassword(auth, email.value, password.value)
-        .then((res) => {
+    signIn(email.value, password.value)
 
-        })
-        .catch((err) => {
-            console.log(err.message)
-        });
+}
+const handleClickSignUp = () => {
 
-    if(!error.value) {
-        email.value = ""
-        password.value = ""
+    if(!formIsValid()) {
+        console.log('Something is not ok...')
+        error.value = true
+        return
     }
 
-    isPending.value = false
-    router.push({ path: '/ask-edgar' })
+    signUp(email.value, password.value)
 }
 
-const singUpFormIsValid = () => {
+const formIsValid = () => {
 
     //will need more elaborate form validation
     if(email.value && password.value) {
         return true
     }
 
+    return false
 
 }
 
-const logInAccount = async () => {
-  console.log('login')
-    if(isPending.value) {
-        return
-    }
-
-    isPending.value = true
-    error.value = false
-
-  await signInWithEmailAndPassword(auth, email.value, password.value)
-      .then((data) => {
-
-      })
-      .catch((err) => {
-        error.value = err.message
-      })
-
-  router.push({ path: '/ask-edgar' })
-}
 
 </script>
 

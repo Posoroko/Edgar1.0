@@ -1,10 +1,10 @@
-import { ref } from 'vue'
-import { folderData, selectedFolder, selectedSearch } from '@/edgar/explorer'
+import { folderData, selectedFolder } from '@/edgar/explorer'
 import { error, isPending} from '@/edgar/errorPending'
 import { setDoc } from "firebase/firestore"
-import { folderDataRef } from '@/firebase/dataBaseRefs'
+import { folderDataRef } from '@/firebase/dbRefs'
 
 let tempFolderData = null
+
 
 export const addFolder = async (newFolderName) => {
 
@@ -12,6 +12,7 @@ export const addFolder = async (newFolderName) => {
         error.value = "Easy tiger, hold on a minut!"
         return
     }
+
     error.value = null
     isPending.value = true
 
