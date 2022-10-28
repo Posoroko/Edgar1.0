@@ -17,7 +17,8 @@ const signUp = async (email, password) => {
 
     await createUserWithEmailAndPassword(auth, email, password)
         .then((res) => {
-            userUid.value = data.user.uid
+            console.log(res.user.uid)
+            userUid.value = res.user.uid
             createRefs()
         })
         .catch((err) => {

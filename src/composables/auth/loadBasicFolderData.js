@@ -79,7 +79,7 @@ export const loadBasicFolderData = async () => {
 
     await setDoc(folderDataRef, emptyData )
         .then((res) => {
-            console.log(res)
+
         }).catch((err) => {
             console.log(err.message)
         })
