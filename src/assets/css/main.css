@@ -17,7 +17,7 @@ input {
 body {
     width: 400px;
     margin: auto;
-    background-color: rgb(24, 24, 24);
+    background-color: var(--primary-color);
     /* border: 1px solid var(--secondary-color); */
 }
 

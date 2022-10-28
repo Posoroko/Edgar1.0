@@ -1,11 +1,14 @@
 <template>
-        <p>Hello guys</p>
+
+    
+
 </template>
 
 <script setup>
 import { ref } from 'vue'
 
-console.log('welcome to search page')
+// <img src="@/assets/images/logo-edgar-small.jpg" alt="">
+
 
 </script>
 

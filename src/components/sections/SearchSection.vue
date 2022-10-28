@@ -6,8 +6,8 @@
                 Search
             </p>
 
-            <span class="searchSectionCollapse tab icon">
-                arrow_drop_down
+            <span class="searchSectionCollapse">
+              <span class="icon">arrow_drop_down</span>
             </span>
         </div>
         <section class="sectionContent">
@@ -22,6 +22,9 @@
                 </div>
             </div>
         </section>
+        <div class="bottomOptionsBox">
+            
+        </div>
 
     </section>
 </template>
@@ -39,6 +42,7 @@ import { ref } from 'vue'
     padding: 0 10px;
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
 }
 .topOptionsBox .tab {
     color: var(--primary-color);
@@ -52,8 +56,20 @@ import { ref } from 'vue'
 
 }
 .searchSectionCollapse {
-    font-size: 18px;
-    /* padding: 2px 2px 0px 2px; */
+    height: 15px;
+    width: 15px;
+    background-color: var(--secondary-color);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    position: relative;
+}
+
+.searchSectionCollapse .icon{
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .sectionContent {

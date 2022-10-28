@@ -2,7 +2,7 @@
   <section class="fullPage">
     <header class="flex column alignItemsCenter center marginTop50">
         <div class="frame">
-        <img class="logo" src="@/assets/images/logotemporaire.png" alt="">
+        <img class="logo" src="@/assets/images/logo-edgar-small.jpg" alt="">
         </div>
 
         <p class="text">
@@ -25,12 +25,11 @@
     <form class="flex column marginTop20" @submit.prevent>
       
       <input id="emailInput" type="text" placeholder="email" v-model="email">
-      <p>{{email}}</p>
 
       <input id="passwordInput" type="password" placeholder="password" v-model="password">
 
       <div class="buttonBox centered marginTop20">
-        <button class="button soloBtn solidFrame" v-if="!isNewUser" @click.prevent>sign in</button>
+        <button class="button soloBtn solidFrame" v-if="!isNewUser" @click.prevent="logInAccount">log in</button>
         <button class="button soloBtn solidFrame" v-if="isNewUser" @click.prevent="createAccount">create account</button>
       </div>
     
@@ -46,7 +45,7 @@ import { ref} from 'vue'
 import { auth } from '@/firebase/config'
 import router from '@/router/index'
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 
 const isPending = ref(false)
 const error = ref(false)
@@ -59,7 +58,7 @@ const email = ref("")
 const password = ref("")
 
 const createAccount = async () => {
-    
+
     if(isPending.value) {
         return
     }
@@ -75,7 +74,7 @@ const createAccount = async () => {
 
     await createUserWithEmailAndPassword(auth, email.value, password.value)
         .then((res) => {
-            console.log(res)
+
         })
         .catch((err) => {
             console.log(err.message)
@@ -87,7 +86,7 @@ const createAccount = async () => {
     }
 
     isPending.value = false
-    router.push({ path: '/search' })
+    router.push({ path: '/ask-edgar' })
 }
 
 const singUpFormIsValid = () => {
@@ -98,6 +97,26 @@ const singUpFormIsValid = () => {
     }
 
 
+}
+
+const logInAccount = async () => {
+  console.log('login')
+    if(isPending.value) {
+        return
+    }
+
+    isPending.value = true
+    error.value = false
+
+  await signInWithEmailAndPassword(auth, email.value, password.value)
+      .then((data) => {
+
+      })
+      .catch((err) => {
+        error.value = err.message
+      })
+
+  router.push({ path: '/ask-edgar' })
 }
 
 </script>
