@@ -1,15 +1,15 @@
 <template>
     <section class="folderSection flex spaceEvenly marginTop20" v-if="folderData">
         <div class="explorerBox halfSection">
-                <span class="explorerLine" :ref="folderList" @click="selectFolder(index)" v-for="(folder, index) in folderData.folders" :key="index" :data-index="index">
-                    <span class="pointer explorerText">
+                <span class="explorerLine" :ref="folderList" v-for="(folder, index) in folderData.folders" :key="index" :data-index="index">
+                    <span class="pointer explorerText" @click="selectFolder(index)">
                         <span class="icon explorerIcon" v-if="selectedFolder == index">folder_open</span>
                         <span class="icon explorerIcon" v-if="selectedFolder != index">folder</span>
                         <span :class="{ selected: selectedFolder == index}" >{{folder.name}}</span>
                     </span>
 
                     <span class="options">
-                        <span class="icon closeBtn" @click="editFolder" :data-index="index">edit</span>
+                        <span class="icon closeBtn" @click="editFolderName" :data-index="index">edit</span>
                         <span class="icon closeBtn" @click="deleteFolder" :data-index="index">close</span>
                     </span>
                 </span>
@@ -37,7 +37,7 @@
             
             <div class="folderContent">
                 <div v-if="folderData.folders[selectedFolder].searches">
-                    <div class="searchName" v-for="(search, index) in folderData.folders[selectedFolder].searches" :key="index" >
+                    <div class="searchName explorerLine" v-for="(search, index) in folderData.folders[selectedFolder].searches" :key="index" >
                         <span class="explorerText pointer" @click="selectSearch(index)">
                             <span class="icon pointer" v-if=" selectedSearch == index">
                                 arrow_right
@@ -46,6 +46,11 @@
                             <span :class="{ 'selected': selectedSearch == index}">
                                 {{search.name}}
                             </span>
+                        </span>
+
+                        <span class="options">
+                            <span class="icon closeBtn" @click="editSearchName" :data-index="index">edit</span>
+                            <span class="icon closeBtn" @click="deleteSearch" :data-index="index">close</span>
                         </span>
                         
                     </div>
@@ -88,29 +93,30 @@ const selectFolder = (folder) => {
 }
 
 const requestNewFolder = () => {
-
     creatingNewFolder.value = true
-
     // wait for dom to update, it needs a better solution
     setTimeout(() => {
         newFolderInput.value.focus()
     }, 100)
-
 }
 
 const createNewFolder = async () => {
-    
     if(!newFolderInput.value.value) {
         return
     }
-
     if(await addFolder(newFolderInput.value.value)) {
         creatingNewFolder.value = false
         newFolderInput.value.value = ''
     }
-    
+}
+
+const deleteFolder = async (index) => {
     
 }
+
+
+
+
 
 //All about searches
 
@@ -119,6 +125,7 @@ const newSearchInput = ref(null)
 const creatingNewSearch = ref(false)
 
 const selectSearch = (index) => {
+    console.table(folderData.value.folders[selectedFolder.value].searches[selectedSearch.value].name)
     selectedSearch.value = index
 }
 
@@ -150,11 +157,9 @@ const createNewSearch = async () => {
     }
     creatingNewSearch.value = true
     newSearchInput.value.value = newName
-    
-    
 }
 
-getFolderData()
+
 
 
 </script>
@@ -171,7 +176,7 @@ getFolderData()
 }
 
 .explorerText {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 300;
     display: inline-flex;
     align-items: center;

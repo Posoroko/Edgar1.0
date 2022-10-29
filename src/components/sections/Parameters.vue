@@ -4,30 +4,56 @@
         <div class="cardTop"></div>
     </div>
 
-    <div class="sitesParameters" v-for="parameter in parameters" :key="parameter">
+    <div class="sitesParameters" v-for="(param, index) in params" :key="index">
         <div class='paramCard'>
             <div class="titleContainer">
-                <span class="paramText">{{parameter}}</span>
+                <span class="paramText">{{param.name}}</span>
                 <span class="icon paramIcon">
-                    <span class="icon" :data-param="parameter" @click="closeParameter" v-if="paramExpandedState[parameter] == true">expand_less</span>
-                    <span class="icon" :data-param="parameter" @click="expandParameter" v-if="paramExpandedState[parameter] == false">expand_more</span>
+                    <span class="icon" :data-param="parameter" :data-index="index" v-if="params[index].visible == true" @click="params[index].visible = false">visibility</span>
+                    <span class="icon" :data-param="parameter" :data-index="index" v-if="params[index].visible == false" @click="params[index].visible = true">visibility_off</span>
+                    <span class="icon" :data-param="parameter" :data-index="index"  @click="params[index].open = false" v-if="params[index].open == true">expand_less</span>
+                    <span class="icon" :data-param="parameter" :data-index="index" @click="params[index].open = true" v-if="params[index].open == false">expand_more</span>
                 </span>
             </div>
-            <div class="paramContent" v-if="paramExpandedState[parameter] == true">
-                hello
+
+            <div :class="{ closedParam: params[index].open == false}">
+                <ParamContent :param="params[index].name" />
             </div>
+            
+
             <div class="cardTop"></div>
         </div>
     </div>
-
-
- 
 
 </div>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import ParamContent from '@/components/sections/parameters/ParamContent'
+
+const params = ref([
+    {
+        name: 'sites',
+        open: true,
+        visible: false
+    },
+    {
+        name: 'words',
+        open: true,
+        visible: false
+    },
+    {
+        name: 'languages',
+        open: false,
+        visible: false
+    },
+    {
+        name: 'dates',
+        open: false,
+        visible: false
+    }
+])
 
 const parameters = ref(['sites', 'words', 'languages', 'dates'])
 
@@ -37,17 +63,6 @@ const paramExpandedState = ref({
     languages: false,
     dates: false
 })
-
-const expandParameter = (e) => {
-    const param = e.target.getAttribute('data-param')
-    paramExpandedState.value[param] = true
-}
-
-const closeParameter = (e) => {
-    const param = e.target.getAttribute('data-param')
-    paramExpandedState.value[param] = false
-}
-
 
 </script>
 
@@ -85,5 +100,8 @@ const closeParameter = (e) => {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+}
+.closedParam {
+    display: none;
 }
 </style>

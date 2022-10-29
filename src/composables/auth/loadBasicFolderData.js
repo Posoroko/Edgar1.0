@@ -13,42 +13,39 @@ export const loadBasicFolderData = async () => {
     const emptyData = {
         folders: [
             {
-                name: 'basics',
+                name: 'favorites',
                 searches: [
-                    {
-                        name: 'wiki',
-                        parameters: {
-                            sites: [
-                                {
-                                    name: 'wikipedia',
-                                    solo: true,
-                                    mute: false
-                                }
-                            ],
-                            words: [
-                                {
-                                    name: 'pizza',
-                                    required: true,
-                                    mute: false
-                                }
-                            ]
-                        }
-                    },
                     {
                         name: 'pizza',
                         parameters: {
                             sites: [
                                 {
-                                    name: 'pizza',
-                                    solo: true,
+                                    name: 'wikipedia',
+                                    solo: false,
                                     mute: false
+                                },
+                                {
+                                    name: 'pizzanapoletana',
+                                    solo: true,
+                                    mute: false,
                                 }
                             ],
                             words: [
                                 {
-                                    name: 'Napoli',
+                                    name: 'pizza',
                                     required: true,
                                     mute: false
+                                },
+                                {
+                                    name: 'tradizionale',
+                                    required: true,
+                                    mute: false
+                                }
+                            ],
+                            languages: [
+                                {
+                                    name: 'it',
+                                    solo: true
                                 }
                             ]
                         }
@@ -68,6 +65,12 @@ export const loadBasicFolderData = async () => {
                                     name: 'England',
                                     required: true,
                                     mute: false
+                                }
+                            ],
+                            languages: [
+                                {
+                                    name: 'en',
+                                    solo: true
                                 }
                             ]
                         }
