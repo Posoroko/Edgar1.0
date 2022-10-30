@@ -4,13 +4,12 @@
             <div class="paramLine" v-for="(param, index) in parameterList" :key="index">
                 <span class="paramLineOptionsBox">
                     <span class="icon paramLineIcon pointer"
-                        @click="toggleMute(index, $event)" :data-mute="param.mute"
+                        @click="toggleMute(index, $event)"
                         :class="{activeMute : parameterList[index].mute == true}">                        
                         cancel
                     </span>
                     <span class="icon paramLineIcon pointer" 
                         @click="toggleSolo(index, $event)" 
-                        :data-state="param.solo"
                         :class="{activeSolo : parameterList[index].solo == true}">
                         check_box
                     </span>
@@ -31,19 +30,13 @@ const props = defineProps({
     param: String
 });
 
-const parameterList = ref(folderData.value.folders[selectedFolder.value].searches[selectedSearch.value].parameters[props.param])
+const parameterList = ref(liveParameters.value[props.param])
 
 const toggleMute = (index, e) => {
-    parameterList.value[index].mute = !parameterList.value[index].mute
-    e.target.setAttribute('data-mute', parameterList.value[index].mute)
-    // e.target.classList.add('active')
-    console.log(parameterList.value[index].mute)
+    liveParameters.value[props.param][index].mute = !liveParameters.value[props.param][index].mute
 }
 const toggleSolo = (index, e) => {
-    parameterList.value[index].solo = !parameterList.value[index].solo
-    e.target.setAttribute('data-solo', parameterList.value[index].solo)
-    // e.target.classList.add('active')
-    console.log(parameterList.value[index].solo)
+    liveParameters.value[props.param][index].solo = !liveParameters.value[props.param][index].solo
 }
 
 

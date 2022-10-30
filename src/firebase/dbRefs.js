@@ -1,11 +1,9 @@
-import { ref } from 'vue'
-import { doc, collection } from 'firebase/firestore'
+import { doc } from 'firebase/firestore'
 import { db } from '@/firebase/config'
-import { getUser } from '@/composables/auth/getUser'
+import { auth } from '@/firebase/config'
 
-export const folderDataRef = ref(null)
+export const getFolderDataRef = () => {
 
-export const createRefs = () => {
-    let userUid = getUser().uid
-    folderDataRef.value = doc(db, 'users', userUid, "folders", "folderData")
+  return doc(db, 'users', auth.currentUser.uid, "folders", "folderData")
+
 }

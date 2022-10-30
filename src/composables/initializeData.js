@@ -12,12 +12,10 @@ const getFolderData = async () => {
     }
     
     error.value = false
-    console.log(isPending.value = true)
+    isPending.value = true
 
     await getDoc(getFolderDataRef()).then(res => {
-        
         folderData.value = res.data()
-
         liveParameters.value = folderData.value.folders[selectedFolder.value].searches[selectedSearch.value].parameters
 
     }).catch((err) => {
@@ -26,9 +24,7 @@ const getFolderData = async () => {
     })
 
 
-    console.log(isPending.value = false)
+    isPending.value = false
 }
 
 export { getFolderData }
-
-

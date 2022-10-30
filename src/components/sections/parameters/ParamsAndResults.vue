@@ -26,7 +26,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import Parameters from '@/components/sections/Parameters'
+import Parameters from '@/components/sections/parameters/Parameters'
 
 const tab = ref('params');
 

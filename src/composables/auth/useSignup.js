@@ -1,38 +1,38 @@
 import { error, isPending } from '@/edgar/errorPending'
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '@/firebase/config'
-import router from '@/router/index'
 import { loadBasicFolderData } from '@/composables/auth/loadBasicFolderData';
-import { userUid } from '@/composables/auth/getUser'
-import { createRefs } from '@/firebase/dbRefs'
+import { auth } from '@/firebase/config'
+import { user } from '@/composables/auth/getUser'
 
-const signUp = async (email, password) => {
+const signup = async (email, password) => {
 
     if(isPending.value) {
+        console.log('waite a minut!')
         return
     }
 
-    isPending.value = true
+    console.log(isPending.value = true)
     error.value = false
 
     await createUserWithEmailAndPassword(auth, email, password)
         .then((res) => {
-            console.log(res.user.uid)
-            userUid.value = res.user.uid
-            createRefs()
+            user.value = res.user
+            console.log( 'user in signup:', res.user.uid)
         })
         .catch((err) => {
             console.log(err.message)
         });
     
+    //populate the user's db with default data
     await loadBasicFolderData()
+    // <=
 
-    if(!error.value) {
-        router.push({ path: '/ask-edgar' })
-    }
-
-    isPending.value = false
+    console.log(isPending.value = false)
 
 }
 
-  export { signUp }
+const useSignup = () => {
+    return signup
+}
+
+  export default useSignup

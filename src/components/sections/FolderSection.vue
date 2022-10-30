@@ -1,5 +1,5 @@
 <template>
-    <section class="folderSection flex spaceEvenly marginTop20" v-if="folderData">
+    <section class="folderSection flex spaceEvenly">
         <div class="explorerBox halfSection">
                 <span class="explorerLine" :ref="folderList" v-for="(folder, index) in folderData.folders" :key="index" :data-index="index">
                     <span class="pointer explorerText" @click="selectFolder(index)">
@@ -81,8 +81,6 @@ import { error, isPending } from '@/edgar/errorPending'
 import { getFolderData } from '@/composables/loadExplorer'
 
 //All about folders
-
-
 const creatingNewFolder = ref(false)
 const newFolderInput = ref(null)
 
@@ -119,8 +117,6 @@ const deleteFolder = async (index) => {
 
 
 //All about searches
-
-
 const newSearchInput = ref(null)
 const creatingNewSearch = ref(false)
 
@@ -130,9 +126,7 @@ const selectSearch = (index) => {
 }
 
 const requestNewSearch = () => {
-    
     creatingNewSearch.value = true
-
     setTimeout(() => {
         newSearchInput.value.focus()
     }, 1000)
@@ -144,8 +138,6 @@ const cancleNewSearch = () => {
 }
 
 const createNewSearch = async () => {
-    
-    
     if(!newSearchInput.value.value) {
         console.log('no input')
         return
@@ -159,15 +151,13 @@ const createNewSearch = async () => {
     newSearchInput.value.value = newName
 }
 
-
-
-
 </script>
 
 <style scoped>
 
 .folderSection {
     height: 124px;
+    margin-top: 10px;
 }
 
 .halfSection {

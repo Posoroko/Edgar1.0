@@ -1,11 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/Home'
 import AskEdgar from '@/views/AskEdgar'
+import { auth } from '@/firebase/config'
 
+// auth guard
 
-import Buttons from '@/views/component library/Buttons'
-import Sections from '@/views/component library/Sections'
+const requireAuth = (to, from, next) => {
 
+  let user = auth.currentUser
+  
+  if(!user) {
+    console.log("userin auth guard: ", user)
+    next({name: 'Home' })
+  } else {
+    console.log("userin auth guard: ", user.uid)
+    next()
+  }
+}
 
 const routes = [
   {
@@ -16,23 +27,11 @@ const routes = [
   {
     path: '/ask-edgar',
     name: 'AskEdgar',
-    component: AskEdgar
-  },
-  {
-    path: '/buttons',
-    name: 'Buttons',
-    component: Buttons
-  },
-  {
-    path: '/sections',
-    name: 'Sections',
-    component: Sections
+    component: AskEdgar,
+    beforeEnter: requireAuth
   }
 ]
 
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+const router = createRouter({ history: createWebHistory(process.env.BASE_URL), routes })
 
 export default router

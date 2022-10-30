@@ -9,10 +9,10 @@
             <div class="titleContainer">
                 <span class="paramText">{{param.name}}</span>
                 <span class="icon paramIcon">
-                    <span class="icon" :data-param="parameter" :data-index="index" v-if="params[index].visible == true" @click="params[index].visible = false">visibility</span>
-                    <span class="icon" :data-param="parameter" :data-index="index" v-if="params[index].visible == false" @click="params[index].visible = true">visibility_off</span>
-                    <span class="icon" :data-param="parameter" :data-index="index"  @click="params[index].open = false" v-if="params[index].open == true">expand_less</span>
-                    <span class="icon" :data-param="parameter" :data-index="index" @click="params[index].open = true" v-if="params[index].open == false">expand_more</span>
+                    <span class="icon pointer" :data-param="parameter" :data-index="index" v-if="params[index].visible == true" @click="params[index].visible = false">visibility</span>
+                    <span class="icon pointer" :data-param="parameter" :data-index="index" v-if="params[index].visible == false" @click="params[index].visible = true">visibility_off</span>
+                    <span class="icon pointer" :data-param="parameter" :data-index="index"  @click="params[index].open = false" v-if="params[index].open == true">expand_less</span>
+                    <span class="icon pointer" :data-param="parameter" :data-index="index" @click="params[index].open = true" v-if="params[index].open == false">expand_more</span>
                 </span>
             </div>
 

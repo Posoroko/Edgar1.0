@@ -10,6 +10,7 @@
     --secondary-color: #f0b323;
     --secondary-color-faded: #f0b223a8;
     --secondary-color-hover: #b9f023;
+    --secondary-color-alt: rgb(69, 133, 69);
 
     /* selected items */
     --highlight-color: #f0b323;

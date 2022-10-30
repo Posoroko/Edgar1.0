@@ -10,22 +10,15 @@
               <span class="icon">arrow_drop_down</span>
             </span>
         </div>
+
         <section class="sectionContent">
             <textarea class="searchBar" name="searchBar" id="searchBar"></textarea>
-            <div class="optionsBox">
-                <!-- language, perfect match -->
-            </div>
-
-            <div class="parameterBigBox">
-                <div class="parameterStripe" v-for="(parameter, index) in shownParameters" :key="`param${index}`">
-
-                </div>
+            
+            <div class="paramStripesBox">
+                
             </div>
         </section>
-        <div class="bottomOptionsBox">
-            
-        </div>
-
+        
     </section>
 </template>
 

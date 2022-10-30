@@ -1,6 +1,7 @@
 <template>  
   <section class="fullPage">
-    <header class="flex column alignItemsCenter center marginTop50">
+    <TopSection />
+    <!-- <header class="flex column alignItemsCenter center marginTop50">
         <div class="frame">
         <img class="logo" src="@/assets/images/logo-edgar-small.jpg" alt="">
         </div>
@@ -8,7 +9,7 @@
         <p class="text">
             Edgar
         </p>
-    </header>
+    </header> -->
 
     <div class="width100 flex center">
       <div class="buttonStripeBox btn20px selectorBox">
@@ -29,8 +30,8 @@
       <input id="passwordInput" type="password" placeholder="password" v-model="password">
 
       <div class="buttonBox centered marginTop20">
-        <button class="button soloBtn solidFrame" v-if="!isNewUser" @click.prevent="handleClickSignIn">log in</button>
-        <button class="button soloBtn solidFrame" v-if="isNewUser" @click.prevent="handleClickSignUp">create account</button>
+        <button class="button soloBtn solidFrame" v-if="!isNewUser" @click.prevent="handleClick">log in</button>
+        <button class="button soloBtn solidFrame" v-if="isNewUser" @click.prevent="handleClick">create account</button>
       </div>
     
     </form>
@@ -40,21 +41,24 @@
 </template>
 
 <script setup>
-import { images } from '@/config/config.js'
 import { ref} from 'vue'
-import { auth } from '@/firebase/config'
-import { signIn } from '@/composables/auth/signIn'
-import { signUp } from '@/composables/auth/signUp'
+import TopSection from '@/components/sections/TopSection'
+import useLogin from '@/composables/auth/useLogin'
+import useSignup from '@/composables/auth/useSignup'
+import { error } from '@/edgar/errorPending'
 import router from '@/router/index'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { user } from '@/composables/auth/getUser'
 
 const isNewUser = ref(false)
+const signup = useSignup()
+
+const login = useLogin()
 
 // const name = ref("")
 const email = ref("")
 const password = ref("")
 
-const handleClickSignIn = () => {
+const handleClick = async () => {
 
     if(!formIsValid()) {
         console.log('Something is not ok...')
@@ -62,19 +66,16 @@ const handleClickSignIn = () => {
         return
     }
 
-    signIn(email.value, password.value)
-
-}
-const handleClickSignUp = () => {
-
-    if(!formIsValid()) {
-        console.log('Something is not ok...')
-        error.value = true
-        return
+    if(!isNewUser.value) {
+      await login(email.value, password.value)
+    } else {
+      await signup(email.value, password.value)
     }
+  
+    router.push({ name: 'AskEdgar'})
 
-    signUp(email.value, password.value)
 }
+
 
 const formIsValid = () => {
 
