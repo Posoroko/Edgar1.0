@@ -1,6 +1,11 @@
 <template>
 <div class="parameterBox">
-    <div class="topSection">menu
+    <div class="topSection">
+        <div class="topOptionsBar flex flexEnd">
+            <span class="flex alignItemsCenter">
+                <span class="icon saveIcon pointer" v-if="unsavedChanges">save</span>
+            </span>
+        </div>
         <div class="cardTop"></div>
     </div>
 
@@ -29,8 +34,17 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import ParamContent from '@/components/sections/parameters/ParamContent'
+import { liveParameters } from '@/edgar/explorer'
+
+const unsavedChanges = ref(false)
+
+//if liveParameters are updated, this will show the "save changes" icon
+watch(liveParameters.value, () => {
+    unsavedChanges.value = true
+})
+// <=
 
 const params = ref([
     {
@@ -72,6 +86,20 @@ const paramExpandedState = ref({
     width: 100%;
     height: 100%;
 }
+.topOptionsBar {
+    padding: 5px 10px;
+}
+.saveIcon {
+    font-size: 16px;
+    color: var(--secondary-color);
+}
+.activeSave {
+    color: green;
+}
+.inactiveSave {
+    color: red;
+}
+
 .paramText {
     color: var(--secondary-color);
     font-size: 12px;

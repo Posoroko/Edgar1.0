@@ -4,7 +4,7 @@
             <img class="logo" src="@/assets/images/logo-edgar-small.jpg" alt="">
             <span class="edgar">Edgar</span>
         </span>
-        <span class="menuIconBox">
+        <span class="menuIconBox" v-if="user">
             <span class="icon faceIcon pointer">face</span>
             <span class="icon logoutIcon pointer" @click="logout">logout</span>
         </span>
@@ -15,6 +15,7 @@
 import { ref } from 'vue'
 import { auth } from '@/firebase/config'
 import useLogout from '@/composables/auth/useLogout'
+import { user } from '@/composables/auth/getUser'
 
 const logout = useLogout()
 

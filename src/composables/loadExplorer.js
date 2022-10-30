@@ -17,6 +17,7 @@ const getFolderData = async () => {
     await getDoc(getFolderDataRef()).then(res => {
         
         folderData.value = res.data()
+        liveParameters.value = folderData.value.folders
 
         liveParameters.value = folderData.value.folders[selectedFolder.value].searches[selectedSearch.value].parameters
 
