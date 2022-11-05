@@ -14,16 +14,19 @@
         <section class="sectionContent">
             <textarea class="searchBar" name="searchBar" id="searchBar"></textarea>
             
-            <div class="paramStripesBox">
-                
-            </div>
+            <ParamStripeBox />
         </section>
+            
+        
         
     </section>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import ParamStripeBox from '@/components/sections/parameters/ParamStripeBox.vue'
+
+
 
 
 </script>

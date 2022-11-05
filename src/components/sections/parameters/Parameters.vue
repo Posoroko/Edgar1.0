@@ -46,37 +46,20 @@ watch(liveParameters.value, () => {
 })
 // <=
 
+// remembers the states of each panels. open: if the panel is open or closed. visible: if it's visible in the recap section under the search bar.
 const params = ref([
-    {
-        name: 'sites',
-        open: true,
-        visible: false
-    },
-    {
-        name: 'words',
-        open: true,
-        visible: false
-    },
-    {
-        name: 'languages',
-        open: false,
-        visible: false
-    },
-    {
-        name: 'dates',
-        open: false,
-        visible: false
-    }
-])
+    {name: 'sites', open: true, visible: false}, {name: 'words', open: true, visible: false}, 
+    {name: 'languages', open: false,visible: false}, {name: 'dates', open: false, visible: false} ])
+// <=
 
+//lis of the app's parameters
+//TO DO: this should be in the data base at some point
 const parameters = ref(['sites', 'words', 'languages', 'dates'])
+// <=
 
-const paramExpandedState = ref({
-    sites: false,
-    words: false,
-    languages: false,
-    dates: false
-})
+
+// const paramExpandedState = ref({ sites: false, words: false, languages: false, dates: false })
+
 
 </script>
 

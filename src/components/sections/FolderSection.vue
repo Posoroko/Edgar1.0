@@ -15,14 +15,14 @@
                 </span>
 
                 <span>
-                    <span v-if="!creatingNewFolder" class="pointer explorerText" @click="requestNewFolder">
+                    <span v-show="!creatingNewFolder" class="pointer explorerText" @click="requestNewFolder">
                         <span class="icon  explorerIcon">create_new_folder</span>
                         <span>new folder</span>
                     </span>
                     
-                    <div v-if="creatingNewFolder" class="flex alignItemsCenter">
+                    <div v-show="creatingNewFolder" class="flex alignItemsCenter width100" id="newFolderInputBox">
                         <input class="newElementInput explorerText" ref="newFolderInput" id="newFolderInput" placeholder="new folder name">
-                        <span class="icon" @click="createNewFolder">add</span>
+                        <span class="icon pointer" id="createFolderBtn" @click="createNewFolder">add</span>
                     </div>
                 </span>
         </div>
@@ -56,14 +56,14 @@
                     </div>
 
                     <div>
-                        <span v-if="!creatingNewSearch" class="pointer explorerText" @click="requestNewSearch">
+                        <span v-show="!creatingNewSearch" class="pointer explorerText" @click="requestNewSearch">
                             <span class="icon">add</span>
 
                             <span>new search</span>
                         </span>
-                        <div v-if="creatingNewSearch" class="flex alignItemsCenter">
+                        <div v-show="creatingNewSearch" class="flex alignItemsCenter">
                             <input class="newElementInput explorerText" ref="newSearchInput" id="newSearchInput" placeholder="new search name">
-                            <span class="icon" @click="createNewSearch">add</span>
+                            <span class="icon" id="newSearchBtn" @click="createNewSearch">add</span>
                         </div>
                     </div>
                 </div>
@@ -92,11 +92,23 @@ const selectFolder = (folder) => {
 
 const requestNewFolder = () => {
     creatingNewFolder.value = true
+    window.addEventListener('click', closeNewFolderInput, true)
     // wait for dom to update, it needs a better solution
     setTimeout(() => {
         newFolderInput.value.focus()
+        
     }, 100)
 }
+// close the input when user clickes anywhere else on the page
+const closeNewFolderInput = (e) => {
+    
+    if(e.target.id == "newFolderInput" || e.target.id == "createFolderBtn") {
+        return
+    }
+    creatingNewFolder.value = false
+    window.removeEventListener('click', closeNewFolderInput, true)
+}
+// <=
 
 const createNewFolder = async () => {
     if(!newFolderInput.value.value) {
@@ -127,11 +139,23 @@ const selectSearch = (index) => {
 
 const requestNewSearch = () => {
     creatingNewSearch.value = true
+    window.addEventListener('click', closeNewSearchInput, true)
     setTimeout(() => {
         newSearchInput.value.focus()
+        
     }, 1000)
 
-}   
+}
+// close the input when user clicks anywhere else on the page
+const closeNewSearchInput = (e) => {
+    console.log(e.target)
+    if(e.target.id == "newSearchInput" || e.target.id == "createSearchBtn") {
+        console.log('eric')
+    }
+    creatingNewSearch.value = false
+    window.removeEventListener('click', closeNewSearchInput, true)
+}
+// <=
 
 const cancleNewSearch = () => {
     creatingNewSearch.value = false
@@ -200,9 +224,11 @@ const createNewSearch = async () => {
 }
 
 .newElementInput {
+    width: 85%;
     color: var(--secondary-color);
     outline: none;
     border-bottom: 1px solid var(--secondary-color);
+    /* display: inline; */
 }
 
 

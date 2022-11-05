@@ -16,9 +16,10 @@ const getFolderData = async () => {
 
     await getDoc(getFolderDataRef()).then(res => {
         
+        //imports the user's folders and searches
         folderData.value = res.data()
-        liveParameters.value = folderData.value.folders
 
+        //loads the parameters that will be displayed
         liveParameters.value = folderData.value.folders[selectedFolder.value].searches[selectedSearch.value].parameters
 
     }).catch((err) => {

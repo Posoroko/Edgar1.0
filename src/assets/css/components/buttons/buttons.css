@@ -1,5 +1,5 @@
 .button {
-    padding: 5px 15px;
+    
     cursor: pointer;
     border: none;
     transition: 500ms ease;
@@ -7,31 +7,6 @@
 
 .soloBtn {
     border-radius: 50px;
-}
-
-.buttonStripeBox {
-    display: flex;
-
-}
-
-.buttonStripeBox .button {
-    
-    margin-right: 4px;
-}
-
-.buttonStripeBox .button:first-child {
-    padding-left: 15px;
-    border-bottom-left-radius: 50px;
-    border-top-left-radius: 50px;
-}
-.buttonStripeBox .button:last-child {
-    padding-right: 15px;
-    border-bottom-right-radius: 50px;
-    border-top-right-radius: 50px;
-}
-
-.selectorBox {
-
 }
 
 .selectorBox .button {
@@ -43,18 +18,14 @@
     background-color: var(--secondary-color);
 }
 
-/* .wireFrame .button {
-    color: var(--secondary-color);
-} */
-
 .wireFrame {
     color: var(--secondary-color);
     border: 1px solid var(--secondary-color);
 }
 
 .solidFrame {
-    color: var(--primary-color);
-    background-color: var(--secondary-color);
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
 }
 
 .solidFrame .button:hover {
