@@ -12,12 +12,12 @@
     </header> -->
 
     <div class="width100 flex center">
-      <div class="buttonStripeBox btn20px selectorBox">
-        <div class="button wireFrame" @click="isNewUser = false" :class="{ selected: !isNewUser }">
+      <div class="buttonStripeBox selectorBox">
+        <div class="button loginBtn wireFrame" @click="isNewUser = false" :class="{ selected: !isNewUser }">
           log in
         </div>
         
-        <div class="button wireFrame" @click="isNewUser = true" :class="{ selected: isNewUser }">
+        <div class="button signupBtn wireFrame" @click="isNewUser = true" :class="{ selected: isNewUser }">
           sing up
         </div>
       </div>
@@ -30,8 +30,8 @@
       <input id="passwordInput" type="password" placeholder="password" v-model="password">
 
       <div class="buttonBox centered marginTop20">
-        <button class="button soloBtn solidFrame" v-if="!isNewUser" @click.prevent="handleClick">log in</button>
-        <button class="button soloBtn solidFrame" v-if="isNewUser" @click.prevent="handleClick">create account</button>
+        <button class="button soloBtn solidFrame2" v-if="!isNewUser" @click.prevent="handleClick">log in</button>
+        <button class="button soloBtn solidFrame2" v-if="isNewUser" @click.prevent="handleClick">create account</button>
       </div>
     
     </form>
@@ -106,6 +106,19 @@ const formIsValid = () => {
 }
 .buttonStripeBox {
     margin-top: 10vh;
+    display: flex;
+    gap: 4px;
+}
+.button {
+  padding: 5px 15px;
+}
+.loginBtn {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.signupBtn {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 input {
     width: 100%;
@@ -117,6 +130,10 @@ input {
 }
 input::placeholder {
     color: var(--secondary-color-faded);
+}
+.soloBtn {
+  padding: 5px 15px;
+  border-radius: 50px;
 }
 
 </style>
