@@ -1,12 +1,12 @@
 import { setDoc } from 'firebase/firestore'
 import { error, isPending } from '@/edgar/errorPending'
-import { getFolderDataRef } from '@/firebase/dbRefs'
+import { getUserDataRef } from '@/firebase/dbRefs'
 
 export const loadBasicFolderData = async () => {
 
     isPending.value = true
 
-    await setDoc(getFolderDataRef(), emptyData )
+    await setDoc(getUserDataRef(), defaultData )
         .then((res) => {
 
         }).catch((err) => {
@@ -18,11 +18,27 @@ export const loadBasicFolderData = async () => {
     
 }
 
-
-
-
-
-const emptyData = {
+const defaultData = {
+    displaySettings: {
+       parameters: {
+            sites: {
+                quickAccess: true,
+                paramPanel: true
+            },
+            words: {
+                quickAcces: true,
+                paramPanel: true
+            },
+            languages: {
+                quickAccess: true,
+                paramPanel: false
+            },
+            dates: {
+                quickAccess: false,
+                paramPanel: false
+            }
+       }
+    },
     folders: [
         {
             name: 'favorites',

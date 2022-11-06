@@ -1,7 +1,7 @@
 <template>
     <section class="folderSection flex spaceEvenly">
         <div class="explorerBox halfSection">
-                <span class="explorerLine" :ref="folderList" v-for="(folder, index) in folderData.folders" :key="index" :data-index="index">
+                <span class="explorerLine" :ref="folderList" v-for="(folder, index) in folderData" :key="index" :data-index="index">
                     <span class="pointer explorerText" @click="selectFolder(index)">
                         <span class="icon explorerIcon" v-if="selectedFolder == index">folder_open</span>
                         <span class="icon explorerIcon" v-if="selectedFolder != index">folder</span>
@@ -30,14 +30,14 @@
         <div class="folderBox halfSection">
             <div class="width100 tabContainer">
                 <div class="folderTab">
-                    {{folderData.folders[selectedFolder].name}}
+                    {{folderData[selectedFolder].name}}
                     <div class="borderHack"></div>
                 </div>
             </div>
             
             <div class="folderContent">
-                <div v-if="folderData.folders[selectedFolder].searches">
-                    <div class="searchName explorerLine" v-for="(search, index) in folderData.folders[selectedFolder].searches" :key="index" >
+                <div v-if="folderData[selectedFolder].searches">
+                    <div class="searchName explorerLine" v-for="(search, index) in folderData[selectedFolder].searches" :key="index" >
                         <span class="explorerText pointer" @click="selectSearch(index)">
                             <span class="icon pointer" v-if=" selectedSearch == index">
                                 arrow_right
@@ -78,7 +78,7 @@ import { ref } from 'vue'
 import { selectedFolder, selectedSearch, folderData } from '@/edgar/explorer.js'
 import { addFolder, addSearch } from '@/composables/updateFolderData'
 import { error, isPending } from '@/edgar/errorPending'
-import { getFolderData } from '@/composables/loadExplorer'
+import { getUsererData } from '@/composables/loadExplorer'
 
 //All about folders
 const creatingNewFolder = ref(false)
@@ -86,7 +86,7 @@ const newFolderInput = ref(null)
 
 const selectFolder = (folder) => {
     selectedFolder.value = folder
-    //selectes the first search of the selected folder
+    //selects the first search of the selected folder
     selectedSearch.value = '0'
 }
 
@@ -133,7 +133,6 @@ const newSearchInput = ref(null)
 const creatingNewSearch = ref(false)
 
 const selectSearch = (index) => {
-    console.table(folderData.value.folders[selectedFolder.value].searches[selectedSearch.value].name)
     selectedSearch.value = index
 }
 

@@ -20,6 +20,10 @@ const solo = ref(false);
 const inUrl = ref([])
 // <=
 
+//setting for the display of search parameters. Remembers wether the param is displayed or not, in the param panel and the quickacces panel under the main search bar.
+export const paramSettings = ref(null)
+// <=
+
 // methods for creating, removig, modifying a saved url reference
 const handleNewUrl = {
 

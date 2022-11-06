@@ -1,6 +1,6 @@
 <template>
     <div class="paramStripeBox" v-if="liveParameters">
-        <div class="siteStripe buttonStripeBox">
+        <div class="siteStripe buttonStripeBox" v-if="displaySettings.parameters.sites.quickAccess">
             <span class="button solidFrame flex alignItemsCenter" v-for="(site, index) in liveParameters.sites" :key="index" >
                 <span class="paramName">{{site.name}}</span>
                 <span class="flex alignItemsCenter">
@@ -14,9 +14,14 @@
                     @click="toggleSolo(index, $event)">check_box</span>
                 </span>
             </span>
+
+            <span class="icon paramIcon">
+                <span class="icon pointer" v-if="displaySettings.parameters['sites'].quickAccess" @click="toggleParamDisplay('sites', 'quickAccess')">visibility</span>
+                <span class="icon pointer" v-if="!displaySettings.parameters['sites'].quickAccess" @click="toggleParamDisplay('sites', 'quickAccess')">visibility_off</span>
+            </span>
         </div>
         
-        <div class="wordStripe buttonStripeBox">
+        <div class="wordStripe buttonStripeBox" v-if="displaySettings.parameters.words.quickAccess">
             <span class="button solidFrame flex alignItemsCenter" v-for="(word, index) in liveParameters.words" :key="index" >
                 <span class="paramName">{{word.name}}</span>
                 <span class="flex alignItemsCenter">
@@ -30,6 +35,11 @@
                     @click="toggleSolo(index, $event)">check_box</span>
                 </span>
             </span>
+
+            <span class="icon paramIcon">
+                <span class="icon pointer" v-if="displaySettings.parameters['words'].quickAccess" @click="toggleParamDisplay('words', 'quickAccess')">visibility</span>
+                <span class="icon pointer" v-if="!displaySettings.parameters['words'].quickAccess" @click="toggleParamDisplay('words', 'quickAccess')">visibility_off</span>
+            </span>
         </div>
     </div>
 </template>
@@ -37,6 +47,8 @@
 <script setup>
 import { ref }  from 'vue'
 import { liveParameters } from '@/edgar/explorer'
+import { displaySettings } from '@/edgar/displaySettings'
+import { toggleParamDisplay } from '@/composables/display'
 
 const toggleMute = (index, e) => {
     const paramType = e.currentTarget.getAttribute('data-paramType')

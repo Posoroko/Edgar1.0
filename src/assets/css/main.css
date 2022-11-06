@@ -13,11 +13,14 @@ input {
     border: none;
     background: none;
 }
-
-body {
-    width: 400px;
-    margin: auto;
+html {
     background-color: var(--primary-color);
+}
+body {
+    width: 440px;
+    padding: 20px;
+    margin: 20px auto;
+    background-color: #2f2b2b;
     /* border: 1px solid var(--secondary-color); */
 }
 

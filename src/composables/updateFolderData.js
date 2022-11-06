@@ -1,7 +1,7 @@
 import { folderData, selectedFolder } from '@/edgar/explorer'
 import { error, isPending} from '@/edgar/errorPending'
 import { setDoc } from "firebase/firestore"
-import { getFolderDataRef } from '@/firebase/dbRefs'
+import { getUserDataRef } from '@/firebase/dbRefs'
 
 let tempFolderData = null
 
@@ -16,7 +16,7 @@ export const addFolder = async (newFolderName) => {
     error.value = null
     isPending.value = true
 
-    await setDoc(getFolderDataRef().value, createTempFolderDataWithNewFolder(newFolderName)).then((res) => {
+    await setDoc(getUserDataRef().value, createTempFolderDataWithNewFolder(newFolderName)).then((res) => {
         folderData.value = tempFolderData
     }).catch((err) => {
         console.log(err.message)
@@ -53,7 +53,7 @@ export const addSearch = async (newSearchName) => {
     error.value = null
     isPending.value = true
 
-    await setDoc(getFolderDataRef().value, createTempFolderDataWithNewSearch(newSearchName)).then((res) => {
+    await setDoc(getUserDataRef().value, createTempFolderDataWithNewSearch(newSearchName)).then((res) => {
         folderData.value = tempFolderData
     }).catch((err) => {
         console.log(err.message)

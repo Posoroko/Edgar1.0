@@ -1,9 +1,10 @@
 import { getDoc } from "firebase/firestore"
 import { folderData, liveParameters, selectedFolder, selectedSearch } from '@/edgar/explorer'
-import { getFolderDataRef } from '@/firebase/dbRefs'
+import { getUserDataRef } from '@/firebase/dbRefs'
 import { error, isPending } from '@/edgar/errorPending'
+import { displaySettings } from "@/edgar/displaySettings"
 
-const getFolderData = async () => {
+export const getUserData = async () => {
 
     if(isPending.value) {
         error.value = "Chill out man!"
@@ -14,14 +15,10 @@ const getFolderData = async () => {
     error.value = false
     console.log(isPending.value = true)
 
-    await getDoc(getFolderDataRef()).then(res => {
+    await getDoc(getUserDataRef()).then(res => {
         
-        //imports the user's folders and searches
-        folderData.value = res.data()
-
-        //loads the parameters that will be displayed
-        liveParameters.value = folderData.value.folders[selectedFolder.value].searches[selectedSearch.value].parameters
-
+        loadImportedData(res.data())
+        
     }).catch((err) => {
         
         console.log(err.message)
@@ -31,6 +28,13 @@ const getFolderData = async () => {
     console.log(isPending.value = false)
 }
 
-export { getFolderData }
+const loadImportedData = (userData) => {
+    folderData.value = userData.folders;
+    displaySettings.value = userData.displaySettings
+    liveParameters.value = folderData.value[selectedFolder.value].searches[selectedSearch.value].parameters
+    console.log(displaySettings.value)
+}
+
+
 
 

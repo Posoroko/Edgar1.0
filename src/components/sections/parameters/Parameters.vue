@@ -9,20 +9,20 @@
         <div class="cardTop"></div>
     </div>
 
-    <div class="sitesParameters" v-for="(param, index) in params" :key="index">
+    <div class="sitesParameters" v-for="(parameter, index) in parameters" :key="index">
         <div class='paramCard'>
             <div class="titleContainer">
-                <span class="paramText">{{param.name}}</span>
+                <span class="paramText">{{parameter}} {{displaySettings.parameters[parameter].quickAccess}} </span>
                 <span class="icon paramIcon">
-                    <span class="icon pointer" :data-param="parameter" :data-index="index" v-if="params[index].visible == true" @click="params[index].visible = false">visibility</span>
-                    <span class="icon pointer" :data-param="parameter" :data-index="index" v-if="params[index].visible == false" @click="params[index].visible = true">visibility_off</span>
-                    <span class="icon pointer" :data-param="parameter" :data-index="index"  @click="params[index].open = false" v-if="params[index].open == true">expand_less</span>
-                    <span class="icon pointer" :data-param="parameter" :data-index="index" @click="params[index].open = true" v-if="params[index].open == false">expand_more</span>
+                    <span class="icon pointer" :data-param="parameter" :data-index="index" v-if="displaySettings.parameters[parameter].quickAccess" @click="toggleParamDisplay(parameter, 'quickAccess')">visibility</span>
+                    <span class="icon pointer" :data-param="parameter" :data-index="index" v-if="!displaySettings.parameters[parameter].quickAccess" @click="toggleParamDisplay(parameter, 'quickAccess')">visibility_off</span>
+                    <span class="icon pointer" :data-param="parameter" :data-index="index" v-if="displaySettings.parameters[parameter].paramPanel == false"  @click="toggleParamDisplay(parameter, 'paramPanel')">expand_more</span>
+                    <span class="icon pointer" :data-param="parameter" :data-index="index" v-if="displaySettings.parameters[parameter].paramPanel == true"  @click="toggleParamDisplay(parameter, 'paramPanel')">expand_less</span>
                 </span>
             </div>
 
-            <div :class="{ closedParam: params[index].open == false}">
-                <ParamContent :param="params[index].name" />
+            <div :class="{ closedParam: displaySettings.parameters[parameter].paramPanel == false}">
+                <ParamContent :param="parameter" />
             </div>
             
 
@@ -37,6 +37,8 @@
 import { ref, watch } from 'vue'
 import ParamContent from '@/components/sections/parameters/ParamContent'
 import { liveParameters } from '@/edgar/explorer'
+import { displaySettings } from '@/edgar/displaySettings'
+import { toggleParamDisplay } from '@/composables/display'
 
 const unsavedChanges = ref(false)
 
@@ -46,19 +48,8 @@ watch(liveParameters.value, () => {
 })
 // <=
 
-// remembers the states of each panels. open: if the panel is open or closed. visible: if it's visible in the recap section under the search bar.
-const params = ref([
-    {name: 'sites', open: true, visible: false}, {name: 'words', open: true, visible: false}, 
-    {name: 'languages', open: false,visible: false}, {name: 'dates', open: false, visible: false} ])
-// <=
 
-//lis of the app's parameters
-//TO DO: this should be in the data base at some point
-const parameters = ref(['sites', 'words', 'languages', 'dates'])
-// <=
-
-
-// const paramExpandedState = ref({ sites: false, words: false, languages: false, dates: false })
+const parameters = ref(["sites", "words", "languages", "dates"])
 
 
 </script>

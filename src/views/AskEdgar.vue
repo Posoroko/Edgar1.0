@@ -19,12 +19,12 @@ import FolderSection from '@/components/sections/FolderSection.vue'
 import SearchSection from '@/components/sections/search/SearchSection.vue'
 import ParamsAndResults from '@/components/sections/parameters/ParamsAndResults.vue'
 import { folderData } from '@/edgar/explorer'
-import { getFolderData } from '@/composables/loadExplorer'
+import { getUserData } from '@/composables/loadExplorer'
 import { user } from '@/composables/auth/getUser'
 import router from '@/router/index'
 
 //import data from firestore
-getFolderData()
+getUserData()
 //<=
 
 //is user becomes null, this will redirect to home page
